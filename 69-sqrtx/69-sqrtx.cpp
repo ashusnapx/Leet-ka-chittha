@@ -8,17 +8,17 @@ class Solution
             int lo = 0, hi = x, ans;
             while (lo <= hi)
             {
-            	// looping to get ans
-                long int mid = (lo + hi) / 2;	// find the mid value
-                if (mid <= x / mid)
+
+                long int mid = (lo + hi) / 2;
+                if (mid*mid <= x)
                 {
-                	// if mid * mid <= x ; we can use mid as temporary ans | change if new condn. met.
+
                     ans = mid;
-                    lo = mid + 1;	// update lo; to get new ans if possible
+                    lo = mid + 1;
                 }
-                else hi = mid - 1;	// else just decrease the hi to mid-1
+                else hi = mid - 1;
             }
 
-            return ans;	// return the final ans.
+            return ans;
         }
 };
