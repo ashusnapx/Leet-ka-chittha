@@ -3,14 +3,29 @@ class Solution
     public:
         bool isMonotonic(vector<int> &nums)
         {
-            vector<int> temp = nums;
-            sort(temp.begin(), temp.end());
-            if (nums == temp) return true;
+            int count = 0, count1 = 0;
+            for (int i = 0; i < nums.size() - 1; i++)
+            {
+                if (nums[i] < nums[i + 1])
+                {
+                    count++;
+                }
+                else if (nums[i] > nums[i + 1])
+                {
+                    count1++;
+                }
+                // else if(nums[i] == nums[i+1])
+                // {
+                //     count++;
+                //     count1++;
+                // }
+            }
 
-            temp = nums;
-            sort(temp.begin(), temp.end(), greater<int> ());
-            if (nums == temp) return true;
-
+            // if (count == nums.size() - 2) return true;
+            // else if (count1 == nums.size() - 2) return true;
+            // return false;
+            
+            if(count == 0 or count1 == 0) return true;
             return false;
         }
 };
