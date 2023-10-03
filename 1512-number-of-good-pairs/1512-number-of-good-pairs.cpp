@@ -3,19 +3,16 @@ class Solution
     public:
         int numIdenticalPairs(vector<int> &nums)
         {
-            vector<pair<int, int>> v;
+            unordered_map<int, int> mp;
             int n = nums.size();
-            for (int i = 0; i < n; i++)
-            {
-                for (int j = 0; j < n; j++)
-                {
-                    if (i != j and i < j and nums[i] == nums[j])
-                    {
-                        v.push_back({ i,
-                            j });
-                    }
-                }
+            int total = 0;
+            for(auto i:nums){
+                mp[i]++;
             }
-            return v.size();
+            for(auto i:mp){
+                total+= (i.second*(i.second-1))/2;
+            }
+        
+            return total;
         }
 };
