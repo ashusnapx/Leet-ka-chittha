@@ -1,33 +1,42 @@
-class MyHashMap
-{
-    private:
-        vector<int> arr;
-    public:
-        MyHashMap()
-        {
-            arr = vector<int> (1000001, -1);
+class MyHashMap {
+private:
+    vector<list<pair<int, int>>> data;
+    static const int base = 769;
+    static int hash(int key) {
+        return key % base;
+    }
+
+public:
+    MyHashMap() : data(base) {}
+
+    void put(int key, int value) {
+        int h = hash(key);
+        for (auto it = data[h].begin(); it != data[h].end(); ++it) {
+            if (it->first == key) {
+                it->second = value;
+                return;
+            }
         }
-
-    void put(int key, int value)
-    {
-        arr[key] = value;
+        data[h].push_back({key, value});
     }
 
-    int get(int key)
-    {
-        return arr[key];
+    int get(int key) {
+        int h = hash(key);
+        for (auto it = data[h].begin(); it != data[h].end(); ++it) {
+            if (it->first == key) {
+                return it->second;
+            }
+        }
+        return -1;
     }
 
-    void remove(int key)
-    {
-        arr[key] = -1;
+    void remove(int key) {
+        int h = hash(key);
+        for (auto it = data[h].begin(); it != data[h].end(); ++it) {
+            if (it->first == key) {
+                data[h].erase(it);
+                return;
+            }
+        }
     }
 };
-
-/**
- *Your MyHashMap object will be instantiated and called as such:
- *MyHashMap* obj = new MyHashMap();
- *obj->put(key,value);
- *int param_2 = obj->get(key);
- *obj->remove(key);
- */
